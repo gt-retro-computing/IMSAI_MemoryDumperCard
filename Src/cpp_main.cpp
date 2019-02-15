@@ -3,6 +3,7 @@
 //
 
 #include <Shift595.h>
+#include "cmsis_os.h"
 #include "cpp_main.h"
 
 bus_pin led1{GPIOB, GPIO_PIN_0};
@@ -40,7 +41,7 @@ void cpp_main() {
             bus_write_pin(&led2, i == 0);
 
             shift_addr.load_byte(nums[i]);
-            HAL_Delay(200);
+            osDelay(200);
         }
 
     }
