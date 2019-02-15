@@ -6,8 +6,6 @@
 
 #include "Shift595.h"
 
-#define WRT_DELAY 1
-
 void Shift595::init() {
     bus_write_pin(&srclk, false);
     bus_write_pin(&ser, false);
@@ -29,23 +27,25 @@ void Shift595::load_byte(unsigned char data) {
     }
 
     bus_write_pin(&rclk, false);
-    // HAL_Delay(WRT_DELAY);
+#ifdef MEM_WRITE_DELAY
+    osDelay(1);
+#endif
 
     for (int i = 7; i >= 0; i--) {
         bus_write_pin(&ser, (data & (1 << i)) != 0);
-        // HAL_Delay(WRT_DELAY);
         bus_write_pin(&srclk, true);
-        // HAL_Delay(WRT_DELAY);
+#ifdef MEM_WRITE_DELAY
+        osDelay(1);
+#endif
         bus_write_pin(&srclk, false);
-        // HAL_Delay(WRT_DELAY);
     }
 
     bus_write_pin(&ser, false);
-    // HAL_Delay(WRT_DELAY);
     bus_write_pin(&rclk, true);
-    // HAL_Delay(WRT_DELAY);
+#ifdef MEM_WRITE_DELAY
+    osDelay(1);
+#endif
     bus_write_pin(&rclk, false);
-    // HAL_Delay(WRT_DELAY);
 }
 
 void Shift595::load_uint16(uint16_t data) {
@@ -54,23 +54,28 @@ void Shift595::load_uint16(uint16_t data) {
     }
 
     bus_write_pin(&rclk, false);
-    // HAL_Delay(WRT_DELAY);
+#ifdef MEM_WRITE_DELAY
+    osDelay(1);
+#endif
 
     for (int i = 15; i >= 0; i--) {
         bus_write_pin(&ser, (data & (1 << i)) != 0);
-        // HAL_Delay(WRT_DELAY);
         bus_write_pin(&srclk, true);
-        // HAL_Delay(WRT_DELAY);
+#ifdef MEM_WRITE_DELAY
+        osDelay(1);
+#endif
         bus_write_pin(&srclk, false);
-        // HAL_Delay(WRT_DELAY);
+#ifdef MEM_WRITE_DELAY
+        osDelay(1);
+#endif
     }
 
     bus_write_pin(&ser, false);
-    // HAL_Delay(WRT_DELAY);
     bus_write_pin(&rclk, true);
-    // HAL_Delay(WRT_DELAY);
+#ifdef MEM_WRITE_DELAY
+    osDelay(1);
+#endif
     bus_write_pin(&rclk, false);
-    // HAL_Delay(WRT_DELAY);
 }
 
 void Shift595::set_enabled(bool enabled) {

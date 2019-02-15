@@ -11,13 +11,6 @@
 
 
 
-typedef struct {
-    bus_pin srclk; // SRCLK
-    bus_pin rclk; // RCLK
-    bus_pin ser; // SER
-    bus_pin oe; // \OE
-} bus_shift595;
-
 static void bus_write_pin(bus_pin *pin, bool state) {
     HAL_GPIO_WritePin(pin->gpio, pin->pin, state ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
