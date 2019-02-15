@@ -5,13 +5,11 @@
 #ifndef IMSAI8080STM32PROGRAMMER_SHIFT595_H
 #define IMSAI8080STM32PROGRAMMER_SHIFT595_H
 
-#include "main.h"
+#include "stm32f1xx_hal.h"
+#include "SharedStructs.h"
 
 
-typedef struct {
-    GPIO_TypeDef *gpio;
-    uint16_t pin;
-} bus_pin;
+
 
 typedef struct {
     bus_pin srclk; // SRCLK
