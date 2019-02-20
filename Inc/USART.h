@@ -14,6 +14,8 @@ namespace USART {
 
     extern uint8_t DMA_RX_Buffer[64];
 
+    void init();
+
     void rx_check();
 
     void process_uart_data(uint8_t* data, size_t len);
@@ -23,10 +25,5 @@ namespace USART {
     void send_data(uint8_t* data, size_t len);
 
 }
-
-extern "C" {
-    void usart_rx_check();
-};
-
 
 #endif //IMSAI8080STM32PROGRAMMER_USART_H

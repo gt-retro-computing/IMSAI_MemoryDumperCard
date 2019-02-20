@@ -16,6 +16,7 @@ bus_pin led2{GPIOB, GPIO_PIN_1};
 
 
 void cpp_main() {
+    USART::init();
     S100::init();
 
     osDelay(500);

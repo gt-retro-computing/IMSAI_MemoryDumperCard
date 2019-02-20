@@ -11,3 +11,6 @@ void cpp_init() {
     }
 }
 
+void usart_rx_check() {
+    USART::rx_check();
+}

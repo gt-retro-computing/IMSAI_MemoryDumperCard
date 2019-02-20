@@ -13,6 +13,8 @@ extern "C" {
 
 void cpp_init();
 
+void usart_rx_check();
+
 #ifdef __cplusplus
 };
 #endif

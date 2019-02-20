@@ -188,13 +188,11 @@ void DMA1_Channel5_IRQHandler(void)
   if (__HAL_DMA_GET_IT_SOURCE(&hdma_usart1_rx, DMA_IT_HT) && __HAL_DMA_GET_FLAG(&hdma_usart1_rx, DMA_FLAG_HT5)) {
     __HAL_DMA_CLEAR_FLAG(&hdma_usart1_rx, DMA_FLAG_HT5);
     usart_rx_check();
-    return;
   }
 
   if (__HAL_DMA_GET_IT_SOURCE(&hdma_usart1_rx, DMA_IT_TC) && __HAL_DMA_GET_FLAG(&hdma_usart1_rx, DMA_FLAG_TC5)) {
     __HAL_DMA_CLEAR_FLAG(&hdma_usart1_rx, DMA_FLAG_TC5);
     usart_rx_check();
-    return;
   }
 
   /* USER CODE END DMA1_Channel5_IRQn 0 */
@@ -218,6 +216,8 @@ void TIM1_UP_IRQHandler(void)
   /* USER CODE END TIM1_UP_IRQn 1 */
 }
 
+volatile uint32_t trash;
+
 /**
   * @brief This function handles USART1 global interrupt.
   */
@@ -226,9 +226,9 @@ void USART1_IRQHandler(void)
   /* USER CODE BEGIN USART1_IRQn 0 */
 
   if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE) && __HAL_UART_GET_IT_SOURCE(&huart1, UART_IT_IDLE)) {
-    __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_IDLE);
+      trash = huart1.Instance->SR;
+      trash = huart1.Instance->DR;
     usart_rx_check();
-    return;
   }
 
   /* USER CODE END USART1_IRQn 0 */
