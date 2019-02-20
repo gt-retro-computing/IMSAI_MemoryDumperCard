@@ -46,6 +46,7 @@
 /* USER CODE BEGIN Includes */
 
 #include "cpp_main.h"
+#include "cpp_callbacks.h"
 
 /* USER CODE END Includes */
 

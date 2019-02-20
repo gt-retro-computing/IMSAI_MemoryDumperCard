@@ -10,7 +10,6 @@ extern "C" {
 #endif
 
     void cpp_main();
-    void cpp_init();
 
 #ifdef __cplusplus
 };

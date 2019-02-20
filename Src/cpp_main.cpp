@@ -13,12 +13,7 @@ bus_pin led2{GPIOB, GPIO_PIN_1};
 
 // active low
 
-void cpp_init() {
-    if(HAL_DMA_Start(&hdma_usart1_rx, (uint32_t)&huart1.Instance->DR, (uint32_t) USART::DMA_RX_Buffer, 64) != HAL_OK) {
-        USART::send_string("error");
-    }
 
-}
 
 void cpp_main() {
     S100::init();

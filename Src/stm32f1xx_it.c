@@ -64,6 +64,9 @@
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN PFP */
 
+// Defined in USART.cpp
+void usart_rx_check();
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -182,6 +185,17 @@ void DebugMon_Handler(void)
 void DMA1_Channel5_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Channel5_IRQn 0 */
+  if (__HAL_DMA_GET_IT_SOURCE(&hdma_usart1_rx, DMA_IT_HT) && __HAL_DMA_GET_FLAG(&hdma_usart1_rx, DMA_FLAG_HT5)) {
+    __HAL_DMA_CLEAR_FLAG(&hdma_usart1_rx, DMA_FLAG_HT5);
+    usart_rx_check();
+    return;
+  }
+
+  if (__HAL_DMA_GET_IT_SOURCE(&hdma_usart1_rx, DMA_IT_TC) && __HAL_DMA_GET_FLAG(&hdma_usart1_rx, DMA_FLAG_TC5)) {
+    __HAL_DMA_CLEAR_FLAG(&hdma_usart1_rx, DMA_FLAG_TC5);
+    usart_rx_check();
+    return;
+  }
 
   /* USER CODE END DMA1_Channel5_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_usart1_rx);
@@ -210,9 +224,6 @@ void TIM1_UP_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-
-  // Defined in USART.cpp
-  void usart_rx_check();
 
   if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE) && __HAL_UART_GET_IT_SOURCE(&huart1, UART_IT_IDLE)) {
     __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_IDLE);

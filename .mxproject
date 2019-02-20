@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=/Users/codetector/projects/imsai8080/imsai8080stm32programmer/Inc
+HeaderPath=/Users/will/Work/gt-retro-computing/IMSAI_MemoryDumperCard/Inc
 HeaderFiles=stm32f1xx_it.h;stm32f1xx_hal_conf.h;main.h;FreeRTOSConfig.h;
-SourcePath=/Users/codetector/projects/imsai8080/imsai8080stm32programmer/Src
+SourcePath=/Users/will/Work/gt-retro-computing/IMSAI_MemoryDumperCard/Src
 SourceFiles=stm32f1xx_it.c;stm32f1xx_hal_msp.c;stm32f1xx_hal_timebase_tim.c;main.c;freertos.c;
 
 [PreviousLibFiles]
