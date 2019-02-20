@@ -211,6 +211,15 @@ void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
 
+  // Defined in USART.cpp
+  void usart_rx_check();
+
+  if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE) && __HAL_UART_GET_IT_SOURCE(&huart1, UART_IT_IDLE)) {
+    __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_IDLE);
+    usart_rx_check();
+    return;
+  }
+
   /* USER CODE END USART1_IRQn 0 */
   HAL_UART_IRQHandler(&huart1);
   /* USER CODE BEGIN USART1_IRQn 1 */
