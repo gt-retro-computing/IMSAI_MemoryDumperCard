@@ -14,6 +14,8 @@
 #include <USART.h>
 #include <cstring>
 #include <stdarg.h>
+#include <Hex.h>
+#include <bus_io.h>
 
 #include "USART.h"
 
@@ -74,6 +76,27 @@ void process_uart_line(uint8_t *data, size_t len) {
         USART::printf("HEX:\r\n");
         USART::send_data(data, len);
         USART::send_string("\r\n");
+
+        Hex hex;
+
+        if (hex.read_string(data, len) < 0) {
+            USART::send_string("Malformed HEX :(\r\n");
+            return;
+        }
+
+//        USART::printf("Start Addr: %x\r\n", hex.start_addr);
+//        USART::printf("Total Bytes %x\r\n", hex.length);
+//
+//        for (size_t i = 0; i < hex.length; i++) {
+//            USART::printf("%x\r\n", hex.buf[i]);
+//        }
+
+        S100::acquire();
+        S100::write_mem(hex.start_addr, hex.buf, 0, hex.length);
+        S100::release();
+
+        USART::send_string("Written\r\n");
+
         return;
     }
 
